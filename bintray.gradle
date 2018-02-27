@@ -1,0 +1,16 @@
+apply plugins: 'com.jforg.bintray'
+apply plugins: 'maven-publish'
+
+def projectName = "gradlePlugin"
+def mavenDesc = 'your project descritions'
+def baseUrl = 'https://github.com/GradlePlugin'
+def siteUrl = baseUrl
+def gitUrl = "${baseUrl}/yourGitUrl"
+def issueUrl = "${baseUrl}/yourGitIssueUrl"
+
+def licenseIds = ['Apache-2.0']
+def licenseNames = ['The Apache Software License, Version 2.0']
+def licenseUrls = ['http://www.apache.org/licenses/LICENSE-2.0.txt']
+def inception = '2016'
+
+def username = 'lizhangqu'

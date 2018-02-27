@@ -1,0 +1,26 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    compile 'com.android.tools.build:gradle:2.3.3'
+    compile gradleApi()
+    compile localGroovy()
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+            pom.groupId='com.zykj.gradle.plugin'
+            pom.artifactId='helloplugin'
+            pom.version='1.0.2'
+        }
+    }
+}

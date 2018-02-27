@@ -1,0 +1,109 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    defaultConfig {
+        applicationId "com.zykj.gradleplugin"
+        minSdkVersion 17
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        renderscriptSupportModeEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        release {
+            storeFile file('../../keystore/signature.jks')
+            storePassword 'admin123456'
+            keyAlias 'admin'
+            keyPassword 'admin123456'
+            v2SigningEnabled false
+
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+    dexOptions {
+        preDexLibraries false
+    }
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+}
+
+//apply plugin: 'plugin.hellopword'
+//apply plugin: 'plugin.classtransform'
+//
+//hotpatch {
+//    includePackage = ['com.a.b', 'com.a.c']
+//    excludeClass = ['ClassA','ClassB']
+//    oldDir = "/user/dir/"
+//}
+
+//project.afterEvaluate {
+//    project.android.applicationVariants.each { variant ->
+//
+//        def proguardTask = project.tasks.findByName("transformClassesAndResourcesWithProguardFor${variant.name.capitalize()}")
+//        if (proguardTask) {
+//            project.logger.error "proguard=>${variant.name.capitalize()}"
+//
+//            proguardTask.inputs.files.files.each { File file ->
+//                project.logger.error "file inputs=>${file.absolutePath}"
+//            }
+//
+//            proguardTask.outputs.files.files.each { File file ->
+//                project.logger.error "file outputs=>${file.absolutePath}"
+//            }
+//        }
+//
+//        def dexTask = project.tasks.findByName("transformClassesWithDexFor${variant.name.capitalize()}")
+//        if (dexTask) {
+//            project.logger.error "dex=>${variant.name.capitalize()}"
+//
+//            dexTask.inputs.files.files.each { File file ->
+//                project.logger.error "file inputs=>${file.absolutePath}"
+//            }
+//
+//            dexTask.outputs.files.files.each { File file ->
+//                project.logger.error "file outputs=>${file.absolutePath}"
+//            }
+//        }
+//
+//
+//        def testTask = project.tasks.findByName("transformClassesWithTransformImplFor${variant.name.capitalize()}")
+//        if (testTask) {
+//
+//            Set<File> testTaskInputFiles = testTask.inputs.files.files
+//            Set<File> testTaskOutputFiles = testTask.inputs.files.files
+//
+//            project.logger.error "Name:transformClassesWithTransformImpl=====>${testTask.name} input"
+//            testTaskInputFiles.each { inputFile ->
+//                def path = inputFile.absolutePath
+//                project.logger.error path
+//            }
+//
+//            project.logger.error "Name:transformClassesWithTransformImpl=====>${testTask.name} output"
+//            testTaskOutputFiles.each { inputFile ->
+//                def path = inputFile.absolutePath
+//                project.logger.error path
+//            }
+//        }
+//    }
+//}
